@@ -1,0 +1,12 @@
+export const PAGE_HOME = "/";
+export const PAGE_LOGIN = "/login";
+export const PAGE_ADD_PRODUCT = "/add-product";
+export const PAGE_CONTRIBUTION = "/contribution";
+export const PAGE_ADD_PETS = "/add-pet";
+export const PAGE_MY_PETS = "/my-pets";
+export const PAGE_MY_PRODUCTS = "/my-products";
+export const PAGE_SUBMITTED_PRODUCTS = "/submitted-products";
+export const PAGE_PRODUCT = "/product";
+export const PAGE_REGISTER = "/register";
+export const PAGE_FORGOT_PW = "/forgot-password";
+export const PAGE_VERIFY = "/verify";
