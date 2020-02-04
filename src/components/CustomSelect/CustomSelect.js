@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: BORDER_RADIUS,
     color: "#007EA4",
     background: "#fff",
-    fontWeight: FONT_WEIGHT
+    fontWeight: FONT_WEIGHT,
+    cursor: "pointer"
   },
   select2: {
     border: "0px",
@@ -28,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: BORDER_RADIUS,
     color: "#fff",
     background: "linear-gradient(to right, #2D75D9, #6BA1FF)",
-    fontWeight: FONT_WEIGHT
+    fontWeight: FONT_WEIGHT,
+    cursor: "pointer"
   },
   select3: {
     border: "0px",
@@ -36,7 +38,8 @@ const useStyles = makeStyles(theme => ({
     borderRadius: BORDER_RADIUS,
     color: "#fff",
     background: "linear-gradient(to right, #007EA4, #2BAAD2)",
-    fontWeight: FONT_WEIGHT
+    fontWeight: FONT_WEIGHT,
+    cursor: "pointer"
   }
 }));
 

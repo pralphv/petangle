@@ -9,6 +9,7 @@ import { faCat, faDog, faTimes } from "@fortawesome/free-solid-svg-icons";
 const CustomInputBase = withStyles(theme => ({
   input: {
     margin: theme.spacing(2),
+    paddingLeft: theme.spacing(1),
     width: 210,
     border: "0px",
     "&:focus": {
@@ -50,7 +51,7 @@ export default function PetNameInput({
   const Icon = iconMap[animal];
 
   return (
-    <div>
+    <div style={{background: "#fff"}}>
       <FontAwesomeIcon className={classes.icon} icon={Icon} />
       <CustomInputBase
         autoComplete="off"

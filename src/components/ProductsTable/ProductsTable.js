@@ -69,7 +69,7 @@ const ProductsTable = ({ data, filter, history }) => {
       className="ag-theme-balham"
       style={{
         height: height * heightMultiplier,
-        width: width * 0.8
+        width: width * 0.8,
       }}
     >
       <AgGridReact

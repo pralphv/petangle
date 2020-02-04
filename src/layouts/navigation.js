@@ -18,6 +18,7 @@ import AssessmentIcon from "@material-ui/icons/Assessment";
 import { AddFAB, TopNavBar } from "../components";
 import { useLoggedIn } from "../utils/customHooks";
 import { logout } from "../firebase/crud";
+import BackgroundPaws from "./backgroundPaws";
 import * as constants from "./constants";
 
 const useStyles = makeStyles(theme => ({
@@ -91,6 +92,7 @@ export default function Navigation({ children }) {
       justify="center"
     >
       {isLoggedIn && <AddFAB history={history} />}
+      <BackgroundPaws/>
       {isMobile ? (
         <BottomNavigation
           value={value}

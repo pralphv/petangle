@@ -16,8 +16,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2),
     "&:hover": {
-      background: "#F6F6F6"
+      background: "#F2F8F8"
     },
+    background: "#fff",
     cursor: "pointer",
     maxWidth: 280
   },
