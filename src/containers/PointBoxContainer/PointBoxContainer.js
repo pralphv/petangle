@@ -12,12 +12,15 @@ import {
 } from "../../firebase/crud";
 
 const propsMap = {
-  you: { label: "YOUR POINTS", color: 1 },
-  users: { label: "USER COUNT", color: 2 },
-  pets: { label: "PET COUNT", color: 3 }
+  you: { label: { en: "POINTS", zh: "分數", jp: "ポイント" }, color: 1 },
+  users: { label: { en: "USERS", zh: "用戶量", jp: "ユーザー"}, color: 2 },
+  pets: { label: { en: "PETS", zh: "寵物量", jp: "ペット"}, color: 3 }
 };
 
-function PointBoxContainer({ name }) {
+function PointBoxContainer({ name, locale }) {
+  if (!locale) {
+    locale = 'eng'
+  }
   const userId = useUserId();
   const isLoggedIn = useLoggedIn();
   const firebase = useFirebase();
@@ -41,14 +44,15 @@ function PointBoxContainer({ name }) {
   return (
     <PointBox
       points={value}
-      caption={propsMap[name].label}
+      caption={propsMap[name].label[locale]}
       color={propsMap[name].color}
     />
   );
 }
 
 PointBoxContainer.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  locale: PropTypes.string,
 };
 
 export default PointBoxContainer;

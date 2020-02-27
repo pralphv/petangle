@@ -7,9 +7,8 @@ import { FORM_FIELD_ORDER } from "./constants";
 import { useStyles } from "../../utils/styles";
 import { validateEmail } from "../../utils/helper";
 
-export function CustomField({ name }) {
+export function CustomField({ name, label }) {
   const classes = useStyles();
-  const label = FORM_FIELD_ORDER[name];
   const validateMap = { email: validateEmail };
 
   return (

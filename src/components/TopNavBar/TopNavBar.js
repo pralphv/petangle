@@ -7,6 +7,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import { LanguageButtonContainer } from "../../containers";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -23,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TopNavBar({ homeLink, handleOnClick, iconsToShow }) {
+export default function TopNavBar({ homeLink, handleOnClick, iconsToShow, locale }) {
   const classes = useStyles();
 
   return (
@@ -38,15 +40,16 @@ export default function TopNavBar({ homeLink, handleOnClick, iconsToShow }) {
             Petangle
           </Typography>
           <div className={classes.menu}>
+            <LanguageButtonContainer />
             {iconsToShow.map(icon => {
-              if (icon.label !== "Home") {
+              if (icon.label.en !== "Home") {
                 return (
                   <Button
-                    key={icon.label}
+                    key={icon.label.en}
                     color="inherit"
                     onClick={() => handleOnClick(icon.to)}
                   >
-                    {icon.label}
+                    {icon.label[locale]}
                   </Button>
                 );
               }
@@ -61,5 +64,6 @@ export default function TopNavBar({ homeLink, handleOnClick, iconsToShow }) {
 TopNavBar.propTypes = {
   homeLink: PropTypes.string.isRequired,
   handleOnClick: PropTypes.func.isRequired,
-  iconsToShow: PropTypes.array.isRequired
+  iconsToShow: PropTypes.array.isRequired,
+  locale: PropTypes.string.isRequired,
 };

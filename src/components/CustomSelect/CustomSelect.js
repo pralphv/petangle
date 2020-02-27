@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 
+import { MISC_LANG } from "../../utils/constants";
+import { useLanguage } from "../../utils/customHooks";
+
 const SPACING = 1.5;
 const BORDER_RADIUS = 8;
 const FONT_WEIGHT = 600;
@@ -45,11 +48,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function CustomSelect({
   label,
+  id,
   value,
   listOfOptions,
   handleChangeRedux
 }) {
   const classes = useStyles();
+  const locale = useLanguage();
 
   const classMap = {
     Animal: classes.select2,
@@ -57,7 +62,7 @@ export default function CustomSelect({
     "Food Category": classes.select3
   };
 
-  const selectClass = classMap[label];
+  const selectClass = classMap[id];
 
   function handleChange(e) {
     const value = e.target.value;
@@ -77,7 +82,7 @@ export default function CustomSelect({
               value={elem}
               style={{ color: "#0f0f0f" }}
             >
-              {elem}
+              {id === "Brand"? elem: MISC_LANG[elem][locale]}
             </option>
           ))}
         </select>
@@ -88,6 +93,7 @@ export default function CustomSelect({
 
 CustomSelect.propTypes = {
   label: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   listOfOptions: PropTypes.array,
   handleChangeRedux: PropTypes.func

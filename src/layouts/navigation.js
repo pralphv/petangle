@@ -20,6 +20,7 @@ import { useLoggedIn } from "../utils/customHooks";
 import { logout } from "../firebase/crud";
 import BackgroundPaws from "./backgroundPaws";
 import * as constants from "./constants";
+import { useLanguage } from "../utils/customHooks";
 
 const useStyles = makeStyles(theme => ({
   navBarBackground: {
@@ -27,7 +28,8 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     position: "fixed",
     width: "100%",
-    zIndex: 4500
+    zIndex: 4500,
+    whiteSpace: "nowrap"
   }
 }));
 
@@ -43,29 +45,54 @@ const iconStyleOveride = makeStyles(theme => ({
 }));
 
 const loggedInIcons = [
-  { label: "Pets", icon: PetsIcon, to: constants.PAGE_MY_PETS },
-  { label: "Products", icon: TurnedInIcon, to: constants.PAGE_MY_PRODUCTS },
-  { label: "Home", icon: HomeIcon, to: constants.PAGE_HOME },
   {
-    label: "Contribution",
+    label: { en: "Pets", zh: "寵物", jp: "ペット" },
+    icon: PetsIcon,
+    to: constants.PAGE_MY_PETS
+  },
+  {
+    label: { en: "Products", zh: "產品", jp: "製品" },
+    icon: TurnedInIcon,
+    to: constants.PAGE_MY_PRODUCTS
+  },
+  {
+    label: { en: "Home", zh: "首頁", jp: "ホーム" },
+    icon: HomeIcon,
+    to: constants.PAGE_HOME
+  },
+  {
+    label: { en: "Ranking", zh: "排名", jp: "ランキング" },
     icon: AssessmentIcon,
     to: constants.PAGE_CONTRIBUTION
   },
-  { label: "Logout", icon: ExitToAppIcon, to: "/logout" }
+  {
+    label: { en: "Logout", zh: "登出", jp: "ログアウト" },
+    icon: ExitToAppIcon,
+    to: "/logout"
+  }
 ];
 
 const notLoggedInIcons = [
-  { label: "Login", icon: AccountCircleIcon, to: constants.PAGE_LOGIN },
-  { label: "Home", icon: HomeIcon, to: constants.PAGE_HOME }
+  {
+    label: { en: "Log In", zh: "登入", jp: "ログイン" },
+    icon: AccountCircleIcon,
+    to: constants.PAGE_LOGIN
+  },
+  {
+    label: { en: "Home", zh: "首頁", jp: "ホーム" },
+    icon: HomeIcon,
+    to: constants.PAGE_HOME
+  }
 ];
 
 export default function Navigation({ children }) {
   const classes = useStyles();
   const history = useHistory();
   const firebase = useFirebase();
+  const locale = useLanguage();
 
   const iconStyleOverideClasses = iconStyleOveride();
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:680px)");
   const isLoggedIn = useLoggedIn();
   const [value, setValue] = React.useState("recents");
 
@@ -79,6 +106,7 @@ export default function Navigation({ children }) {
     if (path === "/logout") {
       logout(firebase);
     } else {
+      path = locale ? `/${locale}${path}` : path;
       history.push(path);
     }
   }
@@ -91,8 +119,8 @@ export default function Navigation({ children }) {
       alignItems="center"
       justify="center"
     >
-      {isLoggedIn && <AddFAB history={history} />}
-      <BackgroundPaws/>
+      {isLoggedIn && <AddFAB history={history} locale={locale} />}
+      <BackgroundPaws />
       {isMobile ? (
         <BottomNavigation
           value={value}
@@ -103,7 +131,7 @@ export default function Navigation({ children }) {
           {iconsToShow.map(icon => (
             <BottomNavigationAction
               classes={iconStyleOverideClasses}
-              label={icon.label}
+              label={icon.label[locale]}
               icon={<icon.icon />}
               key={icon.label}
               onClick={() => handleOnClick(icon.to)}
@@ -115,6 +143,7 @@ export default function Navigation({ children }) {
           homeLink={constants.PAGE_HOME}
           handleOnClick={handleOnClick}
           iconsToShow={iconsToShow}
+          locale={locale}
         />
       )}
       {children}

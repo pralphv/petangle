@@ -6,6 +6,7 @@ import { SaveButton } from "../../components";
 import { useLoggedIn, useUserId } from "../../utils/customHooks";
 import { saveProduct, removeSavedProduct } from "../../firebase/crud";
 import { fetchUserSavedProducts } from "../../firebase/crud";
+import { useLanguage } from "../../utils/customHooks";
 
 // this container is not connected to redux
 // each time the product page is loaded, data is reloaded
@@ -14,6 +15,8 @@ function SaveButtonContainer({ productId }) {
   const isLoggedIn = useLoggedIn();
   const firebase = useFirebase();
   const userId = useUserId();
+  const locale = useLanguage();
+
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
@@ -44,7 +47,7 @@ function SaveButtonContainer({ productId }) {
       }
     }
   }
-  return <SaveButton isSaved={isSaved} handleOnClick={handleOnClick} />;
+  return <SaveButton isSaved={isSaved} handleOnClick={handleOnClick} locale={locale}/>;
 }
 
 SaveButtonContainer.propTypes = {

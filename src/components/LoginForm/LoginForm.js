@@ -18,6 +18,7 @@ import {
   PAGE_REGISTER,
   PAGE_FORGOT_PW
 } from "../../layouts/constants";
+import { MISC_LANG } from "../../utils/constants";
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -37,7 +38,37 @@ const useStyles = makeStyles(theme => ({
 
 const errorInitState = "";
 
-export default function LoginForm({ login, history }) {
+const WELCOME = {
+  en: "Welcome back!",
+  zh: "歡迎回來!",
+  jp: "お帰りなさい!"
+};
+
+const REGISTER = {
+  en: "Register",
+  zh: "登錄",
+  jp: "登録"
+};
+
+const FORGOT_PW = {
+  en: "Forgot password",
+  zh: "忘記密碼",
+  jp: "パスワードを忘れですか？"
+};
+
+const LOGIN = {
+  en: "Login",
+  zh: "登入",
+  jp: "ログイン"
+};
+
+const PASSWORD = {
+  en: "Password",
+  zh: "密碼",
+  jp: "パスワード"
+};
+
+export default function LoginForm({ login, history, locale }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loggingIn, setLoggingIn] = useState(false);
@@ -47,6 +78,11 @@ export default function LoginForm({ login, history }) {
 
   function resetErrorState() {
     setError(errorInitState);
+  }
+
+  function changeLanguageUrl(path) {
+    path = locale ? `/${locale}${path}` : path
+    return path
   }
 
   async function handleOnSubmit(e) {
@@ -68,12 +104,12 @@ export default function LoginForm({ login, history }) {
   return (
     <div>
       {loggingIn && <LoadingSpinner />}
-      <BoldTitle text="Welcome back!" />
+      <BoldTitle text={WELCOME[locale]} />
       <form onSubmit={handleOnSubmit} noValidate className={classes.form}>
         <TextField
           className={classes.fieldWidth}
           required
-          label="Email"
+          label={MISC_LANG.email[locale]}
           onChange={e => {
             setEmail(e.target.value);
           }}
@@ -83,7 +119,7 @@ export default function LoginForm({ login, history }) {
           className={classes.fieldWidth}
           required
           autoComplete="current-password"
-          label="Password"
+          label={PASSWORD[locale]}
           type="password"
           onChange={e => {
             setPassword(e.target.value);
@@ -91,18 +127,24 @@ export default function LoginForm({ login, history }) {
         />
         <br />
         <br />
-        <CustomButton text="Login" />
+        <CustomButton text={LOGIN[locale]} />
       </form>
       <ErrorText text={error} />
       <Grid container justify="space-between">
-        <Link to={PAGE_FORGOT_PW} className={classes.link}>
+        <Link
+          to={changeLanguageUrl(PAGE_FORGOT_PW)}
+          className={classes.link}
+        >
           <Typography variant="caption" align="left" color="primary">
-            Forgot password?
+            {FORGOT_PW[locale]}
           </Typography>
         </Link>
-        <Link to={PAGE_REGISTER} className={classes.link}>
+        <Link
+          to={changeLanguageUrl(PAGE_REGISTER)}
+          className={classes.link}
+        >
           <Typography variant="caption" align="right" color="primary">
-            Register
+            {REGISTER[locale]}
           </Typography>
         </Link>
       </Grid>
@@ -112,5 +154,6 @@ export default function LoginForm({ login, history }) {
 
 LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired
 };

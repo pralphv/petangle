@@ -7,7 +7,7 @@ import { AddProductForm, LoadingSpinner } from "../../components";
 import { productsActions } from "../../state/product";
 import { useUserId, useAllProducts } from "../../utils/customHooks";
 
-function AddProductFormContainer({ fetchProducts, addProductToRedux }) {
+function AddProductFormContainer({ fetchProducts, addProductToRedux, locale }) {
   const products = useAllProducts(fetchProducts);
   const firebase = useFirebase();
   const userId = useUserId();
@@ -34,6 +34,7 @@ function AddProductFormContainer({ fetchProducts, addProductToRedux }) {
       addProductToRedux={addProductToRedux}
       firebase={firebase}
       userId={userId}
+      locale={locale}
     />: <LoadingSpinner/>
   );
 }

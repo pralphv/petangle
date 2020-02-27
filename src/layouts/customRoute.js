@@ -6,11 +6,10 @@ import Navigation from "./navigation";
 import { useLoggedIn, useIsVerified, useIsAuthLoaded } from "../utils/customHooks";
 import { PAGE_VERIFY, PAGE_LOGIN } from "./constants";
 
-const CustomRoute = ({ component: Component, isPrivate = false, ...rest }) => {
+function CustomRoute({ component: Component, isPrivate = false, ...rest }) {
   const isLoggedIn = useLoggedIn();
   const isVerified = useIsVerified();
   const isAuthLoaded = useIsAuthLoaded();
-
   return (
     <Route
       {...rest}

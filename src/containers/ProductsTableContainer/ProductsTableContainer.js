@@ -6,10 +6,12 @@ import { useHistory } from "react-router-dom";
 
 import { ProductsTable, LoadingSpinner } from "../../components";
 import { productsActions } from "../../state/product";
-import { useAllProducts } from "../../utils/customHooks";
+import { useAllProducts, useLanguage } from "../../utils/customHooks";
 
 export const ProductsTableContainer = ({ fetchProducts }) => {
   const history = useHistory();
+  const locale = useLanguage();
+
   const foodCategory = useSelector(state => state.productFilter.foodCategory);
   const animal = useSelector(state => state.productFilter.animal);
   const brand = useSelector(state => state.productFilter.brand);
@@ -27,7 +29,12 @@ export const ProductsTableContainer = ({ fetchProducts }) => {
     productsList.push(obj);
   });
   return Object.keys(products).length > 0 ? (
-    <ProductsTable data={productsList} filter={filter} history={history} />
+    <ProductsTable
+      locale={locale}
+      data={productsList}
+      filter={filter}
+      history={history}
+    />
   ) : (
     <LoadingSpinner />
   );

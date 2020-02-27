@@ -5,5 +5,16 @@
 
 .ag-icon {
   background: #fff;
-  opacity: 0.4
+  opacity: 0.4;
+}
+.ag-row .ag-cell {
+  display: flex;
+  align-items: center;
+}
+
+.ag-theme-balham .ag-row-focus {
+  background-color: #B1E2EE;
+}
+.ag-theme-balham .ag-row-hover {
+  background-color: #E1F7FD;
 }

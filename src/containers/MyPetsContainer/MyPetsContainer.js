@@ -21,27 +21,50 @@ import {
   deletePet,
   decreasePetsCount
 } from "../../firebase/crud";
-import { useSelectedProducts } from "../../utils/customHooks";
+import { useLanguage, useSelectedProducts } from "../../utils/customHooks";
 
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 280
-  },
-
+  }
 }));
 
+const EMPTY_TEXT = {
+  en: "You have not added any pets",
+  zh: "你還沒有加任何寵物",
+  jp: "ペットはまた追加していません"
+};
+
+const DELETED_TEXT = {
+  en: "Deleted",
+  zh: "已刪除",
+  jp: "削除しました"
+};
+
+const WARNING_TITLE = {
+  en: "Delete",
+  zh: "刪除",
+  jp: "削除する"
+};
+
+const WARNING_CONTENT = {
+  en: "You will not be able to recover the deleted pet",
+  zh: "刪除了的寵物不能復原",
+  jp: "削除されたペットを取り戻すことはできません"
+};
 
 export const MyPetsContainer = ({ fetchProduct }) => {
   const history = useHistory();
   const firebase = useFirebase();
+  const locale = useLanguage() || "en";
   const pets = useSelector(state => state.firebase.profile.pets);
   const userId = useUserId();
+
   const [open, setOpen] = React.useState(false);
   const [deletingId, setDeletingId] = useState("");
   const [notificationActive, setNotificationActive] = useState(false);
 
   const classes = useStyles();
-
 
   function handleClose() {
     setOpen(false);
@@ -124,11 +147,11 @@ export const MyPetsContainer = ({ fetchProduct }) => {
           </div>
         ))
       ) : (
-        <EmptyPage text="You have not added any pets" />
+        <EmptyPage text={EMPTY_TEXT[locale]} />
       )}
       <CustomDialog
-        title="Delete Pet?"
-        body="You will not be able to recover the deleted pet"
+        title={WARNING_TITLE[locale]}
+        body={WARNING_CONTENT[locale]}
         open={open}
         handleClose={handleClose}
         handleConfirm={handleConfirmDelete}
@@ -136,7 +159,7 @@ export const MyPetsContainer = ({ fetchProduct }) => {
       <NotificationPopUp
         active={notificationActive}
         setState={setNotificationActive}
-        text="Pet Deleted"
+        text={DELETED_TEXT[locale]}
       />
     </div>
   );

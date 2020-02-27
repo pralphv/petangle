@@ -1,14 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { useLanguage } from "../../utils/customHooks";
 import Card from "../Card";
 
 export default function Cards({ productsObj, history, icon, label }) {
+  const locale = useLanguage();
+
   const cardsToLoop = Object.entries(productsObj);
   const finishedLoading = Object.values(productsObj).every(elem => !!elem);
   
   function handleOnClick(id) {
-    history.push(`/product/${id}`);
+    let path = `/product/${id}`;
+    path = locale? `/${locale}${path}` : path
+    history.push(path);
     window.scrollTo(0, 0);
   }
 

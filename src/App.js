@@ -1,6 +1,5 @@
 import React from "react";
 import { Provider } from "react-redux";
-import PropTypes from "prop-types";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
@@ -9,7 +8,6 @@ import store from "./configureStore";
 import MainLayout from "./layouts/mainLayout";
 
 import "./styles.css";
-import { blue } from "@material-ui/core/colors";
 
 // react-redux-firebase config
 const rrfConfig = {
@@ -30,10 +28,12 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: "#387adf"
-    },
+    }
   },
   overrides: {}
 });
+
+// store.dispatch()
 
 const App = () => {
   return (

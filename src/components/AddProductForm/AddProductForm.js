@@ -22,19 +22,26 @@ import {
   pushUserSubmittedProduct
 } from "../../firebase/crud";
 import { sendSlackMsg } from "../../utils/helper";
+import { NUTRITION_LANG, MISC_LANG, SUCCESS_TEXT } from "../../utils/constants";
+
+const TITLE_TEXT = {
+  en: "Add Product",
+  zh: "提交產品",
+  jp: "製品提出"
+};
 
 export default function AddProductForm({
   alreadyExistsBrands,
   brandToProductsMap,
   addProductToRedux,
   firebase,
-  userId
+  userId,
+  locale
 }) {
   const [brand, setBrand] = useState("");
   const [productsSuggestions, setProductsSuggestions] = useState([]);
   const [registerError, setRegisterError] = useState("");
   const [notificationOpen, setNotificationOpen] = useState(false);
-
   useEffect(() => {
     // find product suggestions from brand
     if (brand) {
@@ -66,23 +73,22 @@ export default function AddProductForm({
         addProductToRedux(newReduxObj);
         updateDbUpdateTime(firebase, Date.now());
         sendSlackMsg(msg);
+        setNotificationOpen(true);
+        action.resetForm();
+        setBrand("");
+        window.scrollTo(0, 0);
       }
     } catch (error) {
       console.log(error);
       setRegisterError(
         "There seems to be a server error. Please try again later."
       );
-    } finally {
-      setNotificationOpen(true);
-      action.resetForm();
-      setBrand("");
-      window.scrollTo(0, 0);
     }
   }
 
   return (
     <div>
-      <BoldTitle text="Add a Product" />
+      <BoldTitle text={TITLE_TEXT[locale]} />
       <Formik
         initialValues={INITIAL_STATE}
         onSubmit={(form, action) => handleOnSubmit(form, action)}
@@ -108,8 +114,8 @@ export default function AddProductForm({
                   value={values.a || ""}
                   handleChange={handleChange}
                   handleBlur={handleBlur}
-                  options={["Cat", "Dog"]}
-                  label="Select animal *"
+                  options={[MISC_LANG["Cat"][locale], MISC_LANG["Dog"][locale]]}
+                  label={`${MISC_LANG["a"][locale]} *`}
                 />
                 <br />
                 <FormikCustomSelect
@@ -117,15 +123,19 @@ export default function AddProductForm({
                   value={values.fc || ""}
                   handleChange={handleChange}
                   handleBlur={handleBlur}
-                  options={["Dry Food", "Wet Food", "Snack"]}
-                  label="Select category *"
+                  options={[
+                    MISC_LANG["Dry Food"][locale],
+                    MISC_LANG["Wet Food"][locale],
+                    MISC_LANG["Snack"][locale]
+                  ]}
+                  label={`${MISC_LANG["fc"][locale]} *`}
                 />
                 <br />
                 <CustomAutoSuggestField
                   brand_or_product="b"
                   name={"b"}
                   value={values.b || ""}
-                  label="Brand *"
+                  label={`${NUTRITION_LANG["b"][locale]} *`}
                   setFieldValue={setFieldValue}
                   options={[...alreadyExistsBrands]}
                   setState={setBrand}
@@ -134,15 +144,19 @@ export default function AddProductForm({
                   brand_or_product="pr"
                   name={"pr"}
                   value={values.pr || ""}
-                  label="Product *"
+                  label={`${MISC_LANG["pr"][locale]} *`}
                   setFieldValue={setFieldValue}
                   options={productsSuggestions}
                 />
-                {Object.keys(FORM_FIELD_ORDER).map(name => (
-                  <CustomField name={name} key={name} />
+                {FORM_FIELD_ORDER.map(name => (
+                  <CustomField
+                    name={name}
+                    label={NUTRITION_LANG[name][locale]}
+                    key={name}
+                  />
                 ))}
                 <br />
-                <CustomButton text="Submit" />
+                <CustomButton text={MISC_LANG.submit[locale]} />
                 <br />
                 {registerError && <ErrorText text={registerError} />}
               </form>
@@ -153,7 +167,7 @@ export default function AddProductForm({
       <NotificationPopUp
         active={notificationOpen}
         setState={setNotificationOpen}
-        text="Successfully submitted"
+        text={SUCCESS_TEXT[locale]}
       />
     </div>
   );

@@ -7,9 +7,29 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import {CustomButton} from "../../components"
+import { useLanguage } from "../../utils/customHooks";
 
-export default function CustomDialog({ title, body, open, handleClose, handleConfirm }) {
+const CANCEL_TEXT = {
+  en: "Cancel",
+  zh: "取消",
+  jp: "キャンセル"
+};
+
+const CONFIRM_TEXT = {
+  en: "Confirm",
+  zh: "確定",
+  jp: "確認"
+};
+
+export default function CustomDialog({
+  title,
+  body,
+  open,
+  handleClose,
+  handleConfirm
+}) {
+  const locale = useLanguage() || "en";
+
   return (
     <Dialog
       open={open}
@@ -25,10 +45,15 @@ export default function CustomDialog({ title, body, open, handleClose, handleCon
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Cancel
+          {CANCEL_TEXT[locale]}
         </Button>
-        <Button onClick={handleConfirm} color="primary" variant="contained" autoFocus>
-          Confirm
+        <Button
+          onClick={handleConfirm}
+          color="primary"
+          variant="contained"
+          autoFocus
+        >
+          {CONFIRM_TEXT[locale]}
         </Button>
       </DialogActions>
     </Dialog>

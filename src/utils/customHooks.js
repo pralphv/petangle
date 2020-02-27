@@ -91,3 +91,8 @@ export function useIsAuthLoaded() {
   const isAuthLoaded = useSelector(state => state.firebase.auth.isLoaded);
   return isAuthLoaded;
 }
+
+export function useLanguage() {
+  const language = useSelector(state => state.language.language);
+  return language;
+}

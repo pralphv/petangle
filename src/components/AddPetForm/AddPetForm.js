@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import { Formik } from "formik";
 import { Field } from "formik";
@@ -7,6 +8,7 @@ import { TextField } from "formik-material-ui";
 import { INITIAL_STATE } from "./constants";
 import { petValidationSchema } from "./yupValidation";
 import { useStyles } from "../../utils/styles";
+import { MISC_LANG, SUCCESS_TEXT } from "../../utils/constants";
 import {
   FormikCustomSelect,
   NotificationPopUp,
@@ -16,7 +18,13 @@ import {
 } from "../../components";
 import { addPet, addPetsCount } from "../../firebase/crud";
 
-export default function AddProductForm({ userId, firebase }) {
+const TITLE_TEXT = {
+  jp: "ペット追加",
+  en: "Add a Pet",
+  zh: "加寵物"
+}
+
+export default function AddProductForm({ userId, firebase, locale }) {
   const [registerError, setRegisterError] = useState("");
   const [notificationOpen, setNotificationOpen] = useState(false);
   const classes = useStyles();
@@ -40,7 +48,7 @@ export default function AddProductForm({ userId, firebase }) {
 
   return (
     <div>
-      <BoldTitle text="Add a Pet" />
+      <BoldTitle text={TITLE_TEXT[locale]} />
       <Formik
         initialValues={INITIAL_STATE}
         onSubmit={(form, action) => handleOnSubmit(form, action)}
@@ -67,12 +75,12 @@ export default function AddProductForm({ userId, firebase }) {
                   handleChange={handleChange}
                   handleBlur={handleBlur}
                   options={["cat", "dog"]}
-                  label="Select animal *"
+                  label={`${MISC_LANG.a[locale]} *`}
                 />
                 <br />
                 <Field
                   className={classes.customInput}
-                  label="Name *"
+                  label={`${MISC_LANG.name[locale]} *`}
                   name="n"
                   id="n"
                   autoComplete="off"
@@ -80,7 +88,7 @@ export default function AddProductForm({ userId, firebase }) {
                 />
                 <br />
                 <br />
-                <CustomButton text="Submit" />
+                <CustomButton text={MISC_LANG.submit[locale]} />
               </form>
             </div>
           );
@@ -89,8 +97,14 @@ export default function AddProductForm({ userId, firebase }) {
       <NotificationPopUp
         active={notificationOpen}
         setState={setNotificationOpen}
-        text="Pet added successfully"
+        text={SUCCESS_TEXT[locale]}
       />
     </div>
   );
 }
+
+AddProductForm.propTypes = {
+  userId: PropTypes.string.isRequired,
+  firebase: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired,
+};

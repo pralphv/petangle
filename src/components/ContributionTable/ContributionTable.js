@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function ContributionTable({ rows }) {
+export default function ContributionTable({ rows, text }) {
   const classes = useStyles();
 
   return (
@@ -36,7 +36,7 @@ export default function ContributionTable({ rows }) {
           <TableRow>
             <TableCell></TableCell>
             <TableCell></TableCell>
-            <TableCell align="right">Points</TableCell>
+            <TableCell align="right">{text}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -61,5 +61,6 @@ export default function ContributionTable({ rows }) {
 }
 
 ContributionTable.propTypes = {
-  rows: PropTypes.array.isRequired
+  rows: PropTypes.array.isRequired,
+  text: PropTypes.string.isRequired
 };

@@ -1,11 +1,15 @@
 import React from "react";
 
+import Grid from "@material-ui/core/Grid";
+
 import { ContributionTableContainer } from "../../containers";
 import { PointBoxContainer } from "../../containers";
-import Grid from "@material-ui/core/Grid";
 import { HelmetWrapper } from "../../components";
+import { useLanguage } from "../../utils/customHooks";
 
 export default function ContributionPage() {
+  const locale = useLanguage() || "en";
+
   return (
     <div>
       <HelmetWrapper
@@ -13,11 +17,11 @@ export default function ContributionPage() {
         content="We thank all of you for joining us!"
       />
       <Grid container>
-        <PointBoxContainer name="you" />
-        <PointBoxContainer name="users" />
-        <PointBoxContainer name="pets" />
+        <PointBoxContainer name="you" locale={locale} />
+        <PointBoxContainer name="users" locale={locale} />
+        <PointBoxContainer name="pets" locale={locale} />
       </Grid>
-      <ContributionTableContainer />
+      <ContributionTableContainer locale={locale} />
     </div>
   );
 }

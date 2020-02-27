@@ -1,16 +1,17 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FlagIcon from "@material-ui/icons/Flag";
 import Modal from "@material-ui/core/Modal";
 import { Input } from "@material-ui/core";
-import { CustomButton } from "..";
 
-// const actions = [
-//   { icon: <PetsIcon />, name: "Add Pet" },
-//   { icon: <LocalDiningIcon />, name: "Add Product" }
-// ];
+import { CustomButton } from "..";
+import { useLanguage } from "../../utils/customHooks";
+import { MISC_LANG, NUTRITION_LANG } from "../../utils/constants";
+
 const useStyles = makeStyles(theme => ({
   paper: {
     position: "absolute",
@@ -25,7 +26,36 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ReportButton() {
+const TEXT = {
+  en: "Report",
+  jp: "レポート",
+  zh: "報告"
+};
+
+const THANKS = {
+  en: "Thank you for helping us!",
+  zh: "謝謝你的幫助!",
+  jp: "ご協力いただきありがとうございます！"
+};
+
+const CONTENT_1 = {
+  en:
+    "If you think there is anything wrong for this product's data, please press 'Submit.' We will check and do the corrections.",
+  zh: "如果你認為這產品的資料有誤，請按'提交'。我們會橡查及進行修改。",
+  jp:
+    "この製品の情報が間違っていると思われる場合は、「提出」をクリックしてください。 変更を確認して行います。"
+};
+
+const CONTENT_2 = {
+  en:
+    "We hate to bother you further, but it would be great if you could also provide a link to this product's official website!",
+  zh: "我們很感澈你的幫助，但如果你能提供這產品的官方網站連結會減少我們很多功夫!",
+  jp: "迷惑をかけることは嫌ですが、この製品の公式サイトのリンクを提供していただければ助かります！"
+};
+
+function ReportButton() {
+  const locale = useLanguage();
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -44,9 +74,9 @@ export default function ReportButton() {
           onClick={handleOpen}
           aria-label="save"
           size="small"
-          style={{ fontSize: 17 }}
+          style={{ fontSize: 17, width: 100 }}
         >
-          <FlagIcon /> Report
+          <FlagIcon /> {TEXT[locale]}
         </IconButton>
       </Typography>
       <Modal
@@ -56,33 +86,27 @@ export default function ReportButton() {
         onClose={handleClose}
       >
         <div className={classes.paper}>
-          <Typography>
-            Thank you for helping us keep our database correct!
-          </Typography>
+          <Typography>{THANKS[locale]}</Typography>
           <br />
-          <Typography>
-            If you think there is anything wrong or needs updating for this
-            product's data, please press "Submit". We will check and do the
-            corrections.
-          </Typography>
+          <Typography>{CONTENT_1[locale]}</Typography>
           <br />
-          <Typography>
-            We hate to bother you further, but it would be great if you could
-            also provide a link to this product's official website!
-          </Typography>
-          <form >
+          <Typography>{CONTENT_2[locale]}</Typography>
+          <br />
+
+          <form>
             <div>
-              <Input placeholder="Link" type="text" autoComplete="off" />
+              <Input placeholder={NUTRITION_LANG.li[locale]} type="text" autoComplete="off" />
               <br />
               <br />
               <div className={"report-button-container "}>
-                <CustomButton text="Submit"/>
+                <CustomButton text={MISC_LANG.submit[locale]} />
               </div>
             </div>
           </form>
-
         </div>
       </Modal>
     </div>
   );
 }
+
+export default ReportButton;

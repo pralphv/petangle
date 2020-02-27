@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { makeStyles } from "@material-ui/core/styles";
 import SpeedDial from "@material-ui/lab/SpeedDial";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
@@ -16,11 +18,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const actions = [
-  { icon: <PetsIcon />, name: "Add Pet", to: "/add-pet" },
-  { icon: <LocalDiningIcon />, name: "Add Product", to: "/add-product" }
+  {
+    icon: <PetsIcon />,
+    name: { en: "Add Pet", zh: "加寵物", jp: "ペットを追加する" },
+    to: "/add-pet"
+  },
+  {
+    icon: <LocalDiningIcon />,
+    name: { en: "Submit Product", zh: "提交產品", jp: "製品を提出する" },
+    to: "/add-product"
+  }
 ];
 
-export default function AddFAB({ history }) {
+export default function AddFAB({ history, locale }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -33,6 +43,7 @@ export default function AddFAB({ history }) {
   }
 
   function handleOnClick(to) {
+    to = locale ? `/${locale}${to}` : to;
     history.push(to);
     setOpen(false);
   }
@@ -49,9 +60,9 @@ export default function AddFAB({ history }) {
       >
         {actions.map(action => (
           <SpeedDialAction
-            key={action.name}
+            key={action.name.en}
             icon={action.icon}
-            tooltipTitle={action.name}
+            tooltipTitle={action.name[locale]}
             onClick={() => handleOnClick(action.to)}
           />
         ))}
@@ -59,3 +70,8 @@ export default function AddFAB({ history }) {
     </div>
   );
 }
+
+AddFAB.propTypes = {
+  history: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired
+};

@@ -1,90 +1,93 @@
-export const columnDefs = [
+import {NUTRITION_LANG, MISC_LANG} from "../../utils/constants";
+
+export function createColumnDefs(locale) {
+  return [
     {
-      headerName: "Brand",
+      headerName: NUTRITION_LANG.b[locale],
       field: "b",
       width: 100
     },
     {
-      headerName: "Product",
+      headerName: MISC_LANG.pr[locale],
       field: "pr",
       width: 100,
-      cellStyle: {color: "blue", cursor: "pointer"}
-
+      cellStyle: { color: "blue", cursor: "pointer" }
     },
     {
-      headerName: "Protein (%)",
+      headerName: NUTRITION_LANG.pro[locale],
       field: "pro",
       filter: "agNumberColumnFilter",
       width: 120
     },
     {
-      headerName: "Fat (%)",
+      headerName: NUTRITION_LANG.f[locale],
       field: "f",
       filter: "agNumberColumnFilter",
       width: 80
     },
-  
+
     {
-      headerName: "Carbohydrates (%)",
+      headerName: NUTRITION_LANG.cb[locale],
       field: "cb",
       filter: "agNumberColumnFilter",
       width: 150
     },
     {
-      headerName: "Fibre (%)",
+      headerName: NUTRITION_LANG.fi[locale],
       field: "fi",
       filter: "agNumberColumnFilter",
       width: 90
     },
-  
+
     {
-      headerName: "Wet matter (%)",
+      headerName: NUTRITION_LANG.wm[locale],
       field: "wm",
       filter: "agNumberColumnFilter",
       width: 130
     },
     {
-      headerName: "Crude Ash (%)",
+      headerName: NUTRITION_LANG.cra[locale],
       field: "cra",
       filter: "agNumberColumnFilter",
       width: 130
     },
-  
+
     {
-      headerName: "Calcium (%)",
+      headerName: NUTRITION_LANG.Ca[locale],
       field: "Ca",
       filter: "agNumberColumnFilter",
       width: 110
     },
     {
-      headerName: "Calories (kcal/kg)",
+      headerName: NUTRITION_LANG.cl[locale],
       field: "cl",
       filter: "agNumberColumnFilter",
       width: 145
     },
     {
-      headerName: "Magnesium (%)",
+      headerName: NUTRITION_LANG.Mg[locale],
       field: "Mg",
       filter: "agNumberColumnFilter",
       width: 130
     },
     {
-      headerName: "Phosphorus (%)",
+      headerName: NUTRITION_LANG.P[locale],
       field: "P",
       filter: "agNumberColumnFilter",
       width: 130
     },
     {
-      headerName: "Taurine (%)",
+      headerName: NUTRITION_LANG.t[locale],
       field: "t",
       sortable: true,
       filter: "agNumberColumnFilter",
       width: 110
-    },
+    }
   ];
-  export const defaultColDef = {
-    resizable: true,
-    sortable: true,
-    filter: true
-  };
-  
+}
+
+export const defaultColDef = {
+  resizable: true,
+  sortable: true,
+  filter: true
+};

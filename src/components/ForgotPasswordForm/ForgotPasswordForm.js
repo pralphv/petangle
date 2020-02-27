@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 
 import {
@@ -14,10 +13,23 @@ import {
 import { sendPasswordResetEmail } from "../../firebase/crud";
 import { validateEmail } from "../../utils/helper";
 import { useStyles } from "../../utils/styles";
+import { MISC_LANG } from "../../utils/constants";
+
+const RESET_PW = {
+  en: "Reset Password",
+  zh: "重設密碼",
+  jp: "パスワードをリセット"
+};
+
+const SUCCESS = {
+  en: "Password reset email has been sent",
+  zh: "已發出電郵重設密碼",
+  jp: "パスワードをリセットのメールは送信されました"
+};
 
 const errorInitState = "";
 
-export default function ForgotPasswordForm({ firebase }) {
+export default function ForgotPasswordForm({ firebase, locale }) {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(errorInitState);
@@ -53,30 +65,31 @@ export default function ForgotPasswordForm({ firebase }) {
   return (
     <div>
       {submitting && <LoadingSpinner />}
-      <BoldTitle text="Forgot Password?" />
+      <BoldTitle text={RESET_PW[locale]} />
       <form onSubmit={handleOnSubmit} noValidate>
         <TextField
           className={classes.customInput}
           required
-          label="Email"
+          label={MISC_LANG.email[locale]}
           onChange={e => {
             setEmail(e.target.value);
           }}
         />
         <br />
         <br />
-        <CustomButton text="Submit"/>
+        <CustomButton text={MISC_LANG.submit[locale]} />
         <ErrorText text={error} />
       </form>
       <NotificationPopUp
         active={notificationOpen}
         setState={setNotificationOpen}
-        text="Password reset email has been sent."
+        text={SUCCESS[locale]}
       />
     </div>
   );
 }
 
 ForgotPasswordForm.propTypes = {
-  firebase: PropTypes.object.isRequired
+  firebase: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired
 };

@@ -21,6 +21,7 @@ import {
   sendVerification,
   addUserToContributionEndPoint
 } from "../../firebase/crud";
+import { MISC_LANG } from "../../utils/constants";
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -31,7 +32,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RegisterForm({ firebase, history }) {
+const TITLE = {
+  en: "Join us",
+  zh: "加入我們",
+  jp: "登録"
+};
+
+export default function RegisterForm({ firebase, history, locale }) {
   const [registerError, setRegisterError] = useState("");
   const [notificationOpen, setNotificationOpen] = useState(false);
 
@@ -61,7 +68,7 @@ export default function RegisterForm({ firebase, history }) {
 
   return (
     <div>
-      <BoldTitle text="Join us"/>
+      <BoldTitle text={TITLE[locale]} />
       <Formik
         initialValues={INITIAL_STATE}
         onSubmit={(form, action) => handleOnSubmit(form, action)}
@@ -82,15 +89,17 @@ export default function RegisterForm({ firebase, history }) {
             <div>
               {isSubmitting && <LoadingSpinner />}
               <form onSubmit={handleSubmit}>
-                {Object.keys(FORM_FIELD_ORDER).map(name => (
-                  <CustomField name={name} key={name} />
+                {Object.entries(FORM_FIELD_ORDER).map(([key, value]) => (
+                  <CustomField
+                    label={value[locale]}
+                    name={key}
+                    key={key}
+                  />
                 ))}
                 <br />
-                <CustomButton text="Submit" />
+                <CustomButton text={MISC_LANG.submit[locale]} />
                 <br />
-                {registerError && (
-                  <ErrorText text={registerError}/>
-                )}
+                {registerError && <ErrorText text={registerError} />}
               </form>
             </div>
           );
@@ -107,5 +116,6 @@ export default function RegisterForm({ firebase, history }) {
 
 RegisterForm.propTypes = {
   login: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  locale: PropTypes.string.isRequired
 };

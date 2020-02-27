@@ -7,19 +7,18 @@ import { validateLink } from "./yupValidation";
 import { FORM_FIELD_ORDER } from "./constants";
 import { useStyles } from "../../utils/styles";
 
-export function CustomField({ name }) {
+export function CustomField({ name, label }) {
   const classes = useStyles();
 
   const placeHolderMap = {
     li: "Product's official website"
   };
   const validateMap = { li: validateLink };
-  const fullName = FORM_FIELD_ORDER[name];
   const isRequiredFields = ["f", "pro", "li", "cra", "wm", "fi"];
   const guaranteedAnalysis = ["f", "pro", "cra", "wm", "fi"];
   const isRequired = isRequiredFields.includes(name);
   const isGuaranteedAnalysis = guaranteedAnalysis.includes(name);
-  const label = isRequired ? `${fullName} *` : fullName;
+  label = isRequired ? `${label} *` : label;
 
   // need a way to hint
   // <QuestionMarkAnnotation text="Fill as shown in Guaranteed Analysis" />

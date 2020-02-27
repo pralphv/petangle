@@ -49,7 +49,7 @@ export function CustomAutoSuggestField({
           <Field
             className={classes.customInput} // PLEASE DONT CHANGE ANYTHING HERE
             label={label}
-            name={name + "2"}
+            name={name + "2"}  // 2 is hacky way to make autocomplete to work properly
             component={TextField}
             {...params}
             validate={validateAlreadyExists}

@@ -18,16 +18,16 @@ export const INITIAL_STATE = {
   error: ""
 };
 
-export const FORM_FIELD_ORDER = {
-  pro: "Protein (%)",
-  f: "Fat (%)",
-  fi: "Fibre (%)",
-  wm: "Wet Matter (%)",
-  cra: "Crude Ash (%)",
-  Ca: "Calcium (%)",
-  Mg: "Magnesium (%)",
-  P: "Phosphorus (%)",
-  t: "Taurine (%)",
-  cl: "Calories (kcal/kg)",
-  li: "Link"
-};
+export const FORM_FIELD_ORDER = [
+  "pro",
+  "f",
+  "fi",
+  "wm",
+  "cra",
+  "Ca",
+  "Mg",
+  "P",
+  "t",
+  "cl",
+  "li"
+];

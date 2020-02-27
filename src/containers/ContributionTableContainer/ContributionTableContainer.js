@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 import { useFirebase } from "react-redux-firebase";
 
 import { ContributionTable, LoadingSpinner } from "../../components";
 import { fetchContributionTop10 } from "../../firebase/crud";
 
-function ContributionTableContainer() {
+const TEXT = {
+  "en": "Points",
+  "jp": "ポイント",
+  "zh": "分數",
+}
+
+function ContributionTableContainer({ locale }) {
+  if (!locale) {
+    locale = "eng";
+  }
   const [rows, setRows] = useState([]);
   const firebase = useFirebase();
 
@@ -16,7 +27,15 @@ function ContributionTableContainer() {
     fetchData();
   }, []);
 
-  return rows.length > 0 ? <ContributionTable rows={rows} />: <LoadingSpinner/>;
+  return rows.length > 0 ? (
+    <ContributionTable rows={rows} text={TEXT[locale]}/>
+  ) : (
+    <LoadingSpinner />
+  );
 }
+
+ContributionTable.propTypes = {
+  locale: PropTypes.string
+};
 
 export default ContributionTableContainer;

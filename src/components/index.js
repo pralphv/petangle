@@ -28,3 +28,4 @@ export { default as BoldTitle } from "./BoldTitle";
 export { default as ErrorText } from "./ErrorText";
 export { default as HelmetWrapper } from "./HelmetWrapper";
 export { default as TopNavBar } from "./TopNavBar";
+export { default as LanguageButton } from "./LanguageButton";

@@ -5,13 +5,17 @@ import { useSelector } from "react-redux";
 
 import { CustomSelect } from "../../components";
 import { productFilterActions } from "../../state/productFilter";
+import { MISC_LANG } from "../../utils/constants";
+import { useLanguage } from "../../utils/customHooks";
 
 export const AnimalSelectContainer = ({ filterAnimal }) => {
   const animal = useSelector(state => state.productFilter.animal);
+  const locale = useLanguage();
 
   return (
     <CustomSelect
-      label="Animal" // this needs to be from selector
+      label={MISC_LANG.a[locale]}
+      id={MISC_LANG.a.en}
       value={animal}
       listOfOptions={["Cat", "Dog"]}
       handleChangeRedux={filterAnimal}

@@ -4,13 +4,13 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
-import { columnDefs, defaultColDef } from "./tableSchema";
+import { createColumnDefs, defaultColDef } from "./tableSchema";
 import { useWindow } from "../../utils/customHooks";
 import { PAGE_PRODUCT } from "../../layouts/constants";
 
 import "./styles.css";
 
-const ProductsTable = ({ data, filter, history }) => {
+const ProductsTable = ({ data, filter, history, locale }) => {
   const { width, height } = useWindow();
   const filterAnimal = useRef(filter.animal);
   const filterBrand = useRef(filter.brand);
@@ -32,16 +32,15 @@ const ProductsTable = ({ data, filter, history }) => {
       api.sizeColumnsToFit();
     };
   }, []);
-
-  // const classes = useStyles();
+  let columnDefs = createColumnDefs(locale)
   // 1 is product
   columnDefs[1].cellRenderer = params => {
     var link = document.createElement("a");
-    // link.href = "#";
     link.innerText = params.value;
     link.addEventListener("click", e => {
-      const redirectUrl = `${PAGE_PRODUCT}/${params.data.id}`;
-      history.push(redirectUrl);
+      let path = `${PAGE_PRODUCT}/${params.data.id}`;
+      path = locale ? `/${locale}${path}` : path;
+      history.push(path);
     });
     return link;
   };
@@ -69,7 +68,7 @@ const ProductsTable = ({ data, filter, history }) => {
       className="ag-theme-balham"
       style={{
         height: height * heightMultiplier,
-        width: width * 0.8,
+        width: width * 0.8
       }}
     >
       <AgGridReact
@@ -79,6 +78,7 @@ const ProductsTable = ({ data, filter, history }) => {
         rowSelection="multiple"
         isExternalFilterPresent={() => true}
         doesExternalFilterPass={doesExternalFilterPass}
+        getRowHeight={() => 35}
         onGridReady={onGridReady}
       />
     </div>
@@ -87,7 +87,9 @@ const ProductsTable = ({ data, filter, history }) => {
 
 ProductsTable.propTypes = {
   data: PropTypes.array.isRequired,
-  filter: PropTypes.object.isRequired
+  filter: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
+  locale: PropTypes.string
 };
 
 export default ProductsTable;

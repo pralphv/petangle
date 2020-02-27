@@ -63,3 +63,14 @@ export function sendSlackMsg(msg) {
   const url = `https://slack.com/api/chat.postMessage?token=xoxp-193876967781-194587282198-201614410755-9513c0a9f4b234e9e2be003f2c43e8e5&channel=test&text=${msg}&username=pet-sharing`;
   fetch(url);
 }
+
+export function convertUrlToLanguageUrl(path, language) {
+  let splitted = path.split("/");
+  splitted = splitted.slice(2, splitted.length); // cut out domain name and language
+  const pathWithoutLang = splitted.join("/");
+  const isHomePage = pathWithoutLang.length == 2; // zh, jp etc...
+  const newPath = isHomePage
+    ? `/${language}`
+    : `/${language}/${pathWithoutLang}`;
+  return newPath;
+}

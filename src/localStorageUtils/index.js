@@ -1,4 +1,4 @@
-import { LAST_QUERY_TIME, PRODUCT_LIST } from "./constants";
+import { LANGUAGE, LAST_QUERY_TIME, PRODUCT_LIST } from "./constants";
 
 function getFromLocalStorage(item) {
   const data = localStorage.getItem(item);
@@ -26,3 +26,12 @@ export function getProductsObject() {
 export function setProductsObject(productsObject) {
   setToLocalStorage(PRODUCT_LIST, JSON.stringify(productsObject));
 }
+
+export function setLanguageLocalStorage(language) {
+  setToLocalStorage(LANGUAGE, language)
+}
+
+export function getLanguage() {
+  return getFromLocalStorage(LANGUAGE);
+}
+

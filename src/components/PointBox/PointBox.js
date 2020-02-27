@@ -7,26 +7,25 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
     // width: 100
   },
   paper: {
-    width: 40,
+    width: 45,
     padding: theme.spacing(2),
-    margin: theme.spacing(2)
+    margin: theme.spacing(1)
   },
   1: {
-    borderLeft: "5px solid #4685EB",
+    borderLeft: "5px solid #4685EB"
   },
   2: {
-    borderLeft: "5px solid #0092B9",
+    borderLeft: "5px solid #0092B9"
   },
   3: {
-    borderLeft: "5px solid #C07500",
-  },
-
+    borderLeft: "5px solid #C07500"
+  }
 }));
 
 function PointBox({ points, caption, color }) {
@@ -35,13 +34,20 @@ function PointBox({ points, caption, color }) {
   return (
     <Paper className={`${classes.paper} ${classes[color]}`}>
       <Grid container direction="column">
-        <Typography justify="center" align="center" variant="h5">
-          <Box fontWeight="fontWeightBold">{points}</Box>
-        </Typography>
-        <Typography justify="center" align="center" variant="caption" color="textSecondary">
-        <Box fontSize={10} fontWeight="fontWeightMedium">{caption}</Box>
+        <Typography
+          justify="center"
+          align="center"
+          variant="caption"
+          color="textSecondary"
+        >
+          <Box fontSize={10} fontWeight="fontWeightMedium">
+            {caption}
+          </Box>
         </Typography>
       </Grid>
+      <Typography justify="center" align="center" variant="h5">
+        <Box fontWeight="fontWeightBold">{points}</Box>
+      </Typography>
     </Paper>
   );
 }
