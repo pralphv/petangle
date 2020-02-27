@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 const TITLE = {
   "en/": "Petangle - Your Pet's Nutrition Table",
   "zh/": "Petangle - 你的寵物糧食營養網",
-  "jp/": "Petangle - ペットの食品栄養サイト"
+  "jp/": "Petangle - ペットフードの栄養サイト"
 };
 
 const CONTENT = {
@@ -26,7 +26,7 @@ const CONTENT = {
   "zh/":
     "為你的貓狗尋找最好的糧食。500+ 貓狗糧、乾糧、濕糧、小食營養。找高蛋白質低碳水化合物",
   "jp/":
-    "猫と犬に最適な食べ物を見つけろ！500+ キャットフード，ドッグフード，ドライフード，ウェットフード，スナック栄養。高タンパク,質低炭水化物食品を探す。"
+    "猫と犬に最適なペットフードを見つけろ！500+ 犬・猫用のペットフード，ドライフード，ウェットフード，おやつ栄養。高タンパク,低炭水化物食品を探す。"
 };
 
 const HomePage = ({ history }) => {

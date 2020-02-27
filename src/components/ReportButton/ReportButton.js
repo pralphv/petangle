@@ -35,7 +35,7 @@ const TEXT = {
 const THANKS = {
   en: "Thank you for helping us!",
   zh: "謝謝你的幫助!",
-  jp: "ご協力いただきありがとうございます！"
+  jp: "ご協力いただきありがとうございます。"
 };
 
 const CONTENT_1 = {
@@ -43,14 +43,14 @@ const CONTENT_1 = {
     "If you think there is anything wrong for this product's data, please press 'Submit.' We will check and do the corrections.",
   zh: "如果你認為這產品的資料有誤，請按'提交'。我們會橡查及進行修改。",
   jp:
-    "この製品の情報が間違っていると思われる場合は、「提出」をクリックしてください。 変更を確認して行います。"
+    "この製品についての情報が間違っていると思われる場合，「提出」ボタンをクリックしてください。 その情報をチェックして修正します。"
 };
 
 const CONTENT_2 = {
   en:
     "We hate to bother you further, but it would be great if you could also provide a link to this product's official website!",
   zh: "我們很感澈你的幫助，但如果你能提供這產品的官方網站連結會減少我們很多功夫!",
-  jp: "迷惑をかけることは嫌ですが、この製品の公式サイトのリンクを提供していただければ助かります！"
+  jp: "ご迷惑をおかけしますが，この製品の公式サイトのリンクを提供していただければ助かります！"
 };
 
 function ReportButton() {

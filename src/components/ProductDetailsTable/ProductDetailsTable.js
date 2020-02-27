@@ -51,8 +51,8 @@ const TEXT = {
 
 const NEGATIVE_ANNOTATION = {
   en: "Could be negative due to imprecise nutritional values",
-  zh: "因不精確的營養數字而有機會是負數",
-  jp: "精度が低いから、マイナスになる可能性がある"
+  zh: "營養數值不準確，計算結果有機會變成負數",
+  jp: "データが詳しくない場合、マイナスの値になるかもしれない"
 };
 
 const DRY_MATTER_ANNOTATION = {
