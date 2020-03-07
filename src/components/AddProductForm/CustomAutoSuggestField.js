@@ -17,11 +17,14 @@ export function CustomAutoSuggestField({
 }) {
   const classes = useStyles();
 
+  const [hackyValue, setHackyValue] = useState(); // failed to use proper method
+
   function handleOnChange(value) {
     if (brand_or_product === "b") {
       setState(value);
     }
     setFieldValue(name, value);
+    setHackyValue(value);
   }
 
   function validateAlreadyExists(value) {
@@ -29,7 +32,7 @@ export function CustomAutoSuggestField({
       // for when brand is not loaded yet
       return;
     }
-    if (brand_or_product === "pr" && options.includes(value)) {
+    if (brand_or_product === "pr" && options.includes(hackyValue)) {
       // "includes" can be a set for o(1)
       return "Already exists";
     }
@@ -43,13 +46,13 @@ export function CustomAutoSuggestField({
       id={name}
       freeSolo
       onChange={(_, value) => handleOnChange(value)}
-      onBlur={(e) => handleOnChange(e.target.value)}
+      onBlur={e => handleOnChange(e.target.value)}
       renderInput={params => {
         return (
           <Field
             className={classes.customInput} // PLEASE DONT CHANGE ANYTHING HERE
             label={label}
-            name={name + "2"}  // 2 is hacky way to make autocomplete to work properly
+            name={name + "2"} // 2 is hacky way to make autocomplete to work properly
             component={TextField}
             {...params}
             validate={validateAlreadyExists}

@@ -53,6 +53,8 @@ export default function AddProductForm({
   async function handleOnSubmit(form, action) {
     setRegisterError("");
     const standardizedForm = standardizeFormData(form);
+    console.log(standardizedForm)
+    return
     try {
       const { isSuccessful, snapshot } = await pushProductObject(
         firebase,
@@ -146,7 +148,7 @@ export default function AddProductForm({
                   value={values.pr || ""}
                   label={`${MISC_LANG["pr"][locale]} *`}
                   setFieldValue={setFieldValue}
-                  options={productsSuggestions}
+                  options={productsSuggestions?productsSuggestions : []}
                 />
                 {FORM_FIELD_ORDER.map(name => (
                   <CustomField
