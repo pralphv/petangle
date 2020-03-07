@@ -12,6 +12,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import PetsIcon from "@material-ui/icons/Pets";
 import TurnedInIcon from "@material-ui/icons/TurnedIn";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import SettingsIcon from "@material-ui/icons/Settings";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 
@@ -21,6 +22,7 @@ import { logout } from "../firebase/crud";
 import BackgroundPaws from "./backgroundPaws";
 import * as constants from "./constants";
 import { useLanguage } from "../utils/customHooks";
+import { MISC_LANG } from "../utils/constants";
 
 const useStyles = makeStyles(theme => ({
   navBarBackground: {
@@ -44,33 +46,51 @@ const iconStyleOveride = makeStyles(theme => ({
   selected: {}
 }));
 
-const loggedInIcons = [
-  {
-    label: { en: "Pets", zh: "寵物", jp: "ペット" },
-    icon: PetsIcon,
-    to: constants.PAGE_MY_PETS
-  },
-  {
-    label: { en: "Products", zh: "產品", jp: "製品" },
-    icon: TurnedInIcon,
-    to: constants.PAGE_MY_PRODUCTS
-  },
-  {
-    label: { en: "Home", zh: "首頁", jp: "ホーム" },
-    icon: HomeIcon,
-    to: constants.PAGE_HOME
-  },
-  {
-    label: { en: "Ranking", zh: "排名", jp: "ランキング" },
-    icon: AssessmentIcon,
-    to: constants.PAGE_CONTRIBUTION
-  },
-  {
-    label: { en: "Logout", zh: "登出", jp: "ログアウト" },
-    icon: ExitToAppIcon,
-    to: "/logout"
+function chooseLoggedInIcons(isMobile) {
+  let loggedInIcons = [
+    {
+      label: { en: "Pets", zh: "寵物", jp: "ペット" },
+      icon: PetsIcon,
+      to: constants.PAGE_MY_PETS
+    },
+    {
+      label: { en: "Products", zh: "產品", jp: "製品" },
+      icon: TurnedInIcon,
+      to: constants.PAGE_MY_PRODUCTS
+    },
+    {
+      label: { en: "Home", zh: "首頁", jp: "ホーム" },
+      icon: HomeIcon,
+      to: constants.PAGE_HOME
+    },
+    {
+      label: { en: "Ranking", zh: "排名", jp: "ランキング" },
+      icon: AssessmentIcon,
+      to: constants.PAGE_CONTRIBUTION
+    }
+  ];
+
+  if (isMobile) {
+    loggedInIcons = [
+      ...loggedInIcons,
+      {
+        label: MISC_LANG.setting,
+        icon: SettingsIcon,
+        to: "/settings"
+      }
+    ];
+  } else {
+    loggedInIcons = [
+      ...loggedInIcons,
+      {
+        label: MISC_LANG.logout,
+        icon: ExitToAppIcon,
+        to: "/logout"
+      }
+    ];
   }
-];
+  return loggedInIcons;
+}
 
 const notLoggedInIcons = [
   {
@@ -82,8 +102,21 @@ const notLoggedInIcons = [
     label: { en: "Home", zh: "首頁", jp: "ホーム" },
     icon: HomeIcon,
     to: constants.PAGE_HOME
+  },
+  {
+    label: MISC_LANG.setting,
+    icon: SettingsIcon,
+    to: "/settings"
   }
 ];
+
+function showIcons(isLoggedIn, isMobile) {
+  if (isLoggedIn) {
+    return chooseLoggedInIcons(isMobile);
+  } else {
+    return notLoggedInIcons;
+  }
+}
 
 export default function Navigation({ children }) {
   const classes = useStyles();
@@ -96,8 +129,7 @@ export default function Navigation({ children }) {
   const isLoggedIn = useLoggedIn();
   const [value, setValue] = React.useState("recents");
 
-  const iconsToShow = isLoggedIn ? loggedInIcons : notLoggedInIcons;
-
+  const iconsToShow = showIcons(isLoggedIn, isMobile);
   function handleChange(e, newValue) {
     setValue(newValue);
   }
@@ -133,7 +165,7 @@ export default function Navigation({ children }) {
               classes={iconStyleOverideClasses}
               label={icon.label[locale]}
               icon={<icon.icon />}
-              key={icon.label}
+              key={icon.label.en}
               onClick={() => handleOnClick(icon.to)}
             />
           ))}

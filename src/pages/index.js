@@ -10,3 +10,4 @@ export { default as ContributionPage } from './ContributionPage';
 export { default as RegisterPage } from './RegisterPage';
 export { default as VerifyPage } from './VerifyPage';
 export { default as ForgotPasswordPage } from './ForgotPasswordPage';
+export { default as SettingsPage } from './SettingsPage';

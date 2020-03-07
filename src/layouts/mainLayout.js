@@ -54,6 +54,11 @@ const ROUTES = [
     isPrivate: false
   },
   {
+    path: constants.PAGE_SETTINGS,
+    component: pages.SettingsPage,
+    isPrivate: false
+  },
+  {
     path: `${constants.PAGE_PRODUCT}/:id`,
     component: pages.ProductPage,
     isPrivate: false

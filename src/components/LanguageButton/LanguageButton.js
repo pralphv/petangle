@@ -10,7 +10,7 @@ import TranslateIcon from "@material-ui/icons/Translate";
 import { setLanguageLocalStorage } from "../../localStorageUtils";
 
 const LANG_MAP = {
-  en: "English",
+  en: "Eng",
   zh: "中文",
   jp: "日本語"
 };
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function LanguageButton({ language, changeLanguage, push }) {
+export default function LanguageButton({ language, changeLanguage, push, showIcon=false }) {
   function handleClick(e) {
     setAnchorEl(e.currentTarget);
   }
@@ -48,7 +48,7 @@ export default function LanguageButton({ language, changeLanguage, push }) {
         onClick={handleClick}
         color="inherit"
       >
-        <TranslateIcon className={classes.icon} />
+        {showIcon && <TranslateIcon className={classes.icon} />}
         {LANG_MAP[language]}
       </Button>
       <Menu

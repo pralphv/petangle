@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding-bottom: 70px;
+  overflow-x: hidden;
 }
 
 a {

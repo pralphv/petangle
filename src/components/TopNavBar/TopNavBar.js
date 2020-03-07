@@ -40,7 +40,7 @@ export default function TopNavBar({ homeLink, handleOnClick, iconsToShow, locale
             Petangle
           </Typography>
           <div className={classes.menu}>
-            <LanguageButtonContainer />
+            <LanguageButtonContainer showIcon={true}/>
             {iconsToShow.map(icon => {
               if (icon.label.en !== "Home") {
                 return (

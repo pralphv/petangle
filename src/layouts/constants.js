@@ -10,3 +10,4 @@ export const PAGE_PRODUCT = "/product";
 export const PAGE_REGISTER = "/register";
 export const PAGE_FORGOT_PW = "/forgot-password";
 export const PAGE_VERIFY = "/verify";
+export const PAGE_SETTINGS = "/settings";

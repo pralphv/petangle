@@ -8,7 +8,7 @@ import { changeLanguageActions } from "../../state/language";
 import { useLanguage } from "../../utils/customHooks";
 import { convertUrlToLanguageUrl } from "../../utils/helper";
 
-export const LanguageButtonContainer = ({ changeLanguage }) => {
+export const LanguageButtonContainer = ({ changeLanguage, showIcon=false }) => {
   const history = useHistory();
   const currentPath = history.location.pathname;
   const language = useLanguage();
@@ -23,12 +23,14 @@ export const LanguageButtonContainer = ({ changeLanguage }) => {
       language={language}
       changeLanguage={changeLanguage}
       push={push}
+      showIcon={showIcon}
     />
   );
 };
 
 LanguageButtonContainer.propTypes = {
-  changeLanguage: PropTypes.func.isRequired
+  changeLanguage: PropTypes.func.isRequired,
+  showIcon: PropTypes.bool
 };
 
 export default connect(null, {

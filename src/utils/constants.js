@@ -141,8 +141,17 @@ export const MISC_LANG = {
   password: {
     en: "Password",
     zh: "密碼",
-    jp: "パスワード",
-
+    jp: "パスワード"
+  },
+  setting: {
+    en: "Settings",
+    zh: "設定",
+    jp: "設定"
+  },
+  logout: {
+    en: "Logout",
+    zh: "登出",
+    jp: "ログアウト"
   }
 };
 
