@@ -53,8 +53,6 @@ export default function AddProductForm({
   async function handleOnSubmit(form, action) {
     setRegisterError("");
     const standardizedForm = standardizeFormData(form);
-    console.log(standardizedForm)
-    return
     try {
       const { isSuccessful, snapshot } = await pushProductObject(
         firebase,
