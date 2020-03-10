@@ -26,7 +26,8 @@ import { MISC_LANG } from "../utils/constants";
 
 const useStyles = makeStyles(theme => ({
   navBarBackground: {
-    background: "#333",
+    background:
+      theme.palette.type === "dark" ? theme.palette.dark.navBar : "#34B0D8",
     bottom: 0,
     position: "fixed",
     width: "100%",
@@ -40,7 +41,8 @@ const iconStyleOveride = makeStyles(theme => ({
     minWidth: 60,
     color: theme.palette.type === "dark" ? "#c2c2c2" : "#005A70",
     "&$selected": {
-      color: "#004CA1"
+      color:
+        theme.palette.type === "dark" ? theme.palette.secondary.main : "#004CA1"
     }
   },
   selected: {}
@@ -136,12 +138,8 @@ export default function Navigation({ children }) {
   const iconStyleOverideClasses = iconStyleOveride();
   const isMobile = useMediaQuery("(max-width:680px)");
   const isLoggedIn = useLoggedIn();
-  const [value, setValue] = React.useState("recents");
 
   const iconsToShow = showIcons(isLoggedIn, isMobile);
-  function handleChange(e, newValue) {
-    setValue(newValue);
-  }
 
   function handleOnClick(path) {
     if (path === "/logout") {
@@ -164,8 +162,6 @@ export default function Navigation({ children }) {
       <BackgroundPaws />
       {isMobile ? (
         <BottomNavigation
-          value={value}
-          onChange={handleChange}
           className={classes.navBarBackground}
           showLabels
         >
@@ -176,6 +172,7 @@ export default function Navigation({ children }) {
               icon={<icon.icon />}
               key={icon.label.en}
               onClick={() => handleOnClick(icon.to)}
+              value={icon.label.en}
             />
           ))}
         </BottomNavigation>
