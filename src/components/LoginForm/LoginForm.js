@@ -135,7 +135,7 @@ export default function LoginForm({ login, history, locale }) {
           to={changeLanguageUrl(PAGE_FORGOT_PW)}
           className={classes.link}
         >
-          <Typography variant="caption" align="left" color="primary">
+          <Typography variant="caption" align="left" color="secondary">
             {FORGOT_PW[locale]}
           </Typography>
         </Link>
@@ -143,7 +143,7 @@ export default function LoginForm({ login, history, locale }) {
           to={changeLanguageUrl(PAGE_REGISTER)}
           className={classes.link}
         >
-          <Typography variant="caption" align="right" color="primary">
+          <Typography variant="caption" align="right" color="secondary">
             {REGISTER[locale]}
           </Typography>
         </Link>

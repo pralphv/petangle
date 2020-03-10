@@ -18,11 +18,11 @@ const useStyles = makeStyles(theme => ({
     width: 150
   },
   select1: {
-    borderColor: "#007EA4",
+    borderColor: theme.palette.type === "dark"? theme.palette.secondary.main: theme.palette.primary.main,
     padding: theme.spacing(SPACING),
     borderRadius: BORDER_RADIUS,
-    color: "#007EA4",
-    background: "#fff",
+    color: theme.palette.type === "dark"? theme.palette.secondary.main: theme.palette.primary.main,
+    background: theme.palette.background.default ,
     fontWeight: FONT_WEIGHT,
     cursor: "pointer"
   },

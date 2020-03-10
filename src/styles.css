@@ -12,3 +12,6 @@ a {
 select:focus {
   outline: none;
 }
+.link-dark {
+  color: #82EFFF
+}

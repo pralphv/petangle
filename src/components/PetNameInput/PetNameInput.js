@@ -22,6 +22,9 @@ const CustomInputBase = withStyles(theme => ({
 }))(InputBase);
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    background: theme.palette.background.default,
+  },
   x: {
     cursor: "pointer",
     "&:hover": {
@@ -30,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   icon: {
-    color: "#00273C"
+    color: theme.palette.type === "dark"? "#fff": "#00273C"
 
   }
 }));
@@ -51,7 +54,7 @@ export default function PetNameInput({
   const Icon = iconMap[animal];
 
   return (
-    <div style={{background: "#fff"}}>
+    <div className={classes.root}>
       <FontAwesomeIcon className={classes.icon} icon={Icon} />
       <CustomInputBase
         autoComplete="off"

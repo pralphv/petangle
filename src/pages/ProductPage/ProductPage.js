@@ -1,9 +1,18 @@
 import React from "react";
 
+import { makeStyles } from "@material-ui/core/styles";
+
 import { useLanguage } from "../../utils/customHooks";
 import { ProductDetailsTableContainer, CardsContainer } from "../../containers";
 import Toolbar from "./Toolbar";
 import TextSeparator from "./TextSeparator";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    background: theme.palette.background.default,
+    opacity: 1
+  }
+}));
 
 const TEXT = {
   like: {
@@ -19,11 +28,13 @@ const TEXT = {
 };
 
 function ProductPage(props) {
+  const classes = useStyles();
+
   const productId = props.match.params.id;
   const locale = useLanguage() || "en";
 
   return (
-    <div style={{ background: "#fff" }}>
+    <div className={classes.root}>
       <ProductDetailsTableContainer productId={productId} locale={locale} />
       <Toolbar productId={productId} />
       <TextSeparator text={TEXT.like[locale]} />

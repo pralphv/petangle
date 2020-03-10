@@ -5,21 +5,10 @@ import Switch from "@material-ui/core/Switch";
 
 import { useLanguage } from "../../utils/customHooks";
 import { useLoggedIn } from "../../utils/customHooks";
-import { LanguageButtonContainer } from "../../containers";
+import { LanguageButtonContainer, DarkThemeSwitchContainer } from "../../containers";
 import { HelmetWrapper, SettingsRow } from "../../components";
 import { MISC_LANG } from "../../utils/constants";
 import { logout } from "../../firebase/crud";
-
-function CustomSwitch() {
-  return (
-    <Switch
-      // checked={state.checkedA}
-      // onChange={handleChange('checkedA')}
-      value="checkedA"
-      inputProps={{ "aria-label": "secondary checkbox" }}
-    />
-  );
-}
 
 const TEXT = {
   profile: {
@@ -38,9 +27,9 @@ const TEXT = {
     jp: "言語"
   },
   dark: {
-    en: "Dark Theme (coming soon)",
-    zh: "黑夜模式 (coming soon)",
-    jp: "おやすみモード (coming soon)"
+    en: "Dark Theme",
+    zh: "黑夜模式",
+    jp: "ダークモード"
   }
 };
 
@@ -58,7 +47,7 @@ function SettingsPage() {
           text={TEXT.language[locale]}
           rightSideOption={LanguageButtonContainer}
         />
-        <SettingsRow text={TEXT.dark[locale]} rightSideOption={CustomSwitch} />
+        <SettingsRow text={TEXT.dark[locale]} rightSideOption={DarkThemeSwitchContainer} />
 
         {isLoggedIn && (
           <div>

@@ -12,6 +12,7 @@ export const ProductsTableContainer = ({ fetchProducts }) => {
   const history = useHistory();
   const locale = useLanguage();
 
+  const theme = useSelector(state => state.theme.theme);
   const foodCategory = useSelector(state => state.productFilter.foodCategory);
   const animal = useSelector(state => state.productFilter.animal);
   const brand = useSelector(state => state.productFilter.brand);
@@ -34,6 +35,7 @@ export const ProductsTableContainer = ({ fetchProducts }) => {
       data={productsList}
       filter={filter}
       history={history}
+      theme={theme}
     />
   ) : (
     <LoadingSpinner />

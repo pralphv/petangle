@@ -22,12 +22,14 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
     padding: theme.spacing(2)
   },
-  tableWrapper: {},
   title: {
     flex: "1 1 100%"
   },
   tableRow: {
     height: 33
+  },
+  link:{
+    color: theme.palette.type === "dark"? theme.palette.link:""
   }
 }));
 
@@ -144,6 +146,7 @@ export default function ProductDetailsTable({ productDetails, locale }) {
                           href={productDetails.li}
                           rel="noopener noreferrer"
                           target="_blank"
+                          className={classes.link}
                         >
                           Click Here
                         </a>

@@ -26,7 +26,7 @@ import { MISC_LANG } from "../utils/constants";
 
 const useStyles = makeStyles(theme => ({
   navBarBackground: {
-    background: "#34B0D8",
+    background: "#333",
     bottom: 0,
     position: "fixed",
     width: "100%",
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 const iconStyleOveride = makeStyles(theme => ({
   root: {
     minWidth: 60,
-    color: "#005A70",
+    color: theme.palette.type === "dark" ? "#c2c2c2" : "#005A70",
     "&$selected": {
       color: "#004CA1"
     }
@@ -92,29 +92,38 @@ function chooseLoggedInIcons(isMobile) {
   return loggedInIcons;
 }
 
-const notLoggedInIcons = [
-  {
-    label: { en: "Log In", zh: "登入", jp: "ログイン" },
-    icon: AccountCircleIcon,
-    to: constants.PAGE_LOGIN
-  },
-  {
-    label: { en: "Home", zh: "首頁", jp: "ホーム" },
-    icon: HomeIcon,
-    to: constants.PAGE_HOME
-  },
-  {
-    label: MISC_LANG.setting,
-    icon: SettingsIcon,
-    to: "/settings"
+function chooseLoggedOutIcons(isMobile) {
+  let loggedOutIcons = [
+    {
+      label: { en: "Log In", zh: "登入", jp: "ログイン" },
+      icon: AccountCircleIcon,
+      to: constants.PAGE_LOGIN
+    },
+    {
+      label: { en: "Home", zh: "首頁", jp: "ホーム" },
+      icon: HomeIcon,
+      to: constants.PAGE_HOME
+    }
+  ];
+
+  if (isMobile) {
+    loggedOutIcons = [
+      ...loggedOutIcons,
+      {
+        label: MISC_LANG.setting,
+        icon: SettingsIcon,
+        to: "/settings"
+      }
+    ];
   }
-];
+  return loggedOutIcons;
+}
 
 function showIcons(isLoggedIn, isMobile) {
   if (isLoggedIn) {
     return chooseLoggedInIcons(isMobile);
   } else {
-    return notLoggedInIcons;
+    return chooseLoggedOutIcons(isMobile);
   }
 }
 

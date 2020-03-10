@@ -6,17 +6,24 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import clsx from "clsx";
 
+const darkBorder = "rgba(0, 0, 0, .2)";
+const lightBorder = "rgba(255, 255, 255, .2)";
+
 const useStyles = makeStyles(theme => ({
   root: {
-    borderBottom: "1px solid #e0e0e0",
+    borderBottom: `1px solid ${
+      theme.palette.type === "dark" ? lightBorder : darkBorder
+    }`,
     padding: 0,
     margin: 0
   },
   head: {
-    background: "#f6f6f6"
+    background:
+      theme.palette.type === "dark" ? theme.palette.dark.firstShade : "#f6f6f6"
   },
   body: {
-    background: "#fff"
+    background:
+      theme.palette.type === "dark" ? theme.palette.dark.secondShade : "#fff"
   },
   paddings: {
     paddingTop: theme.spacing(2),

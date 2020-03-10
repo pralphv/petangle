@@ -7,82 +7,81 @@ import Grid from "@material-ui/core/Grid";
 import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCat,
-  faDog
-} from "@fortawesome/free-solid-svg-icons";
+import { faCat, faDog } from "@fortawesome/free-solid-svg-icons";
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2),
-    "&:hover": {
-      background: "#F2F8F8"
-    },
-    background: "#fff",
+    background: theme.palette.background.default,
     cursor: "pointer",
     maxWidth: 280
+    // width: "100%"
   },
   icon: {
     margin: "auto",
     display: "block",
     height: "100%",
-    paddingRight: theme.spacing(2)
+    paddingRight: theme.spacing(2),
+    fontSize: "2.5rem"
   },
   likeIcon: {
-    color: "#CE6B44"
+    color: theme.palette.type === "dark" ? "#EF875F" : "#CE6B44"
   },
   dislikeIcon: {
-    color: "#004DAA"
+    color: theme.palette.type === "dark" ? "#809EFF" : "#004DAA"
   },
-  catIcon: {
-    color: "#004DAA"
+  animalIcon: {
+    color: theme.palette.type === "dark" ? theme.palette.white : theme.palette.black
   },
-  dogIcon: {
-    color: "#004DAA"
-  },
-  
 }));
-
 
 function Card({ title, subtitle, icon, handleOnClick, label }) {
   const classes = useStyles();
   const iconMap = {
-    like: {icon: SentimentSatisfiedAltIcon, class: classes.likeIcon},
-    dislike: {icon: SentimentVeryDissatisfiedIcon, class: classes.dislikeIcon},
-    Cat: {icon: faCat, class: classes.catIcon},
-    Dog: {icon: faDog, class: classes.dogIcon},
+    like: { icon: SentimentSatisfiedAltIcon, class: classes.likeIcon },
+    dislike: {
+      icon: SentimentVeryDissatisfiedIcon,
+      class: classes.dislikeIcon
+    },
+    Cat: { icon: faCat, class: classes.animalIcon },
+    Dog: { icon: faDog, class: classes.animalIcon }
   };
-  
+
   const Icon = iconMap[icon].icon;
   const classToUse = iconMap[icon].class;
   const useFontAwesome = ["like", "dislike"].includes(icon) ? false : true;
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2} onClick={handleOnClick}>
+      <Grid
+        container
+        spacing={2}
+        onClick={handleOnClick}
+        alignContent="center"
+        alignItems="center"
+        justify="center"
+      >
         <Grid item xs={2}>
           {useFontAwesome ? (
-            <FontAwesomeIcon icon={Icon} className={`${classes.icon} ${classToUse}`} />
+            <FontAwesomeIcon
+              icon={Icon}
+              className={`${classes.icon} ${classToUse}`}
+            />
           ) : (
             <Icon className={`${classes.icon} ${classToUse}`} />
           )}
         </Grid>
-        <Grid item xs={10} sm container >
+        <Grid item xs={10} sm container>
           <Grid item xs container direction="column" spacing={2}>
-            <Grid item >
-              <Typography  variant="subtitle2">
-                {title}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-              >
+            <Grid item>
+              <Typography variant="subtitle2">{title}</Typography>
+              <Typography variant="body2" color="textSecondary">
                 {subtitle}
               </Typography>
             </Grid>
           </Grid>
           {label && (
-            <Grid >
+            <Grid>
               <Typography variant="caption" color="textSecondary">
                 {label}
               </Typography>

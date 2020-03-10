@@ -17,3 +17,4 @@ export { default as RegisterFormContainer } from "./RegisterFormContainer";
 export { default as VerifyFormContainer } from "./VerifyFormContainer";
 export { default as ForgotPasswordContainer } from "./ForgotPasswordContainer";
 export { default as LanguageButtonContainer } from "./LanguageButtonContainer";
+export { default as DarkThemeSwitchContainer } from "./DarkThemeSwitchContainer";

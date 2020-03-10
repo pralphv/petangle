@@ -8,7 +8,9 @@ import Popover from "@material-ui/core/Popover";
 
 const useStyles = makeStyles(theme => ({
   icon: {
-    paddingRight: theme.spacing(1)
+    paddingRight: theme.spacing(1),
+    fontSize: "1.5rem"
+
   },
   likeUl: {
     listStyle: "none",

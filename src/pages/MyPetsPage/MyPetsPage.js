@@ -10,7 +10,7 @@ function MyPetsPage() {
   const isAuthLoaded = useIsAuthLoaded();
 
   return (
-    <div>
+    <div >
       <HelmetWrapper title="My Pets" content="My Pets" />
       {!isAuthLoaded ? (
         <LoadingSpinner />

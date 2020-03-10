@@ -30,3 +30,5 @@ export { default as HelmetWrapper } from "./HelmetWrapper";
 export { default as TopNavBar } from "./TopNavBar";
 export { default as LanguageButton } from "./LanguageButton";
 export { default as SettingsRow } from "./SettingsRow";
+export { default as DarkThemeSwitch } from "./DarkThemeSwitch";
+export { default as DarkThemeSwitchNavBar } from "./DarkThemeSwitchNavBar";

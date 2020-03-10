@@ -1,4 +1,4 @@
-import { LANGUAGE, LAST_QUERY_TIME, PRODUCT_LIST } from "./constants";
+import { LANGUAGE, LAST_QUERY_TIME, PRODUCT_LIST, THEME } from "./constants";
 
 function getFromLocalStorage(item) {
   const data = localStorage.getItem(item);
@@ -35,3 +35,11 @@ export function getLanguage() {
   return getFromLocalStorage(LANGUAGE);
 }
 
+export function setTheme(theme) {
+  setToLocalStorage(THEME, theme)
+}
+
+
+export function getTheme() {
+  return getFromLocalStorage(THEME)
+}

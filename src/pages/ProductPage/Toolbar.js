@@ -1,21 +1,23 @@
 import React from "react";
 
-import { LikeButtonContainer, SaveButtonContainer } from "../../containers";
-import { ReportButton } from "../../components";
 import Grid from "@material-ui/core/Grid";
 
-function Toolbar({productId}) {
+import { LikeButtonContainer, SaveButtonContainer } from "../../containers";
+import { ReportButton } from "../../components";
+
+function Toolbar({ productId }) {
+
   return (
-    <Grid container>
+    <Grid container >
       <Grid item xs={12} sm container>
         <Grid item xs>
-          <LikeButtonContainer likeOrDislike="like" productId={productId}/>
+          <LikeButtonContainer likeOrDislike="like" productId={productId} />
         </Grid>
         <Grid item xs>
-          <LikeButtonContainer likeOrDislike="dislike" productId={productId}/>
+          <LikeButtonContainer likeOrDislike="dislike" productId={productId} />
         </Grid>
         <Grid item xs>
-          <SaveButtonContainer productId={productId}/>
+          <SaveButtonContainer productId={productId} />
         </Grid>
         <Grid item xs>
           <ReportButton />

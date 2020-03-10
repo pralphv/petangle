@@ -10,26 +10,28 @@ const useStylesP = makeStyles(theme => ({
     zIndex: -1,
     fontSize: "6em",
     transform: "rotate(-30deg)",
-    color: "#ADE0E4"
+    color: theme.palette.type === "dark"? theme.palette.dark.fourthShade: "#ADE0E4"
   }
 }));
 
 function Paws({ left, bottom }) {
   const classes = useStylesP();
   return (
-      <PetsIcon
-        className={classes.bgPaws}
-        style={{ left: left, bottom: bottom }}
-      />
+    <PetsIcon
+      className={classes.bgPaws}
+      style={{ left: left, bottom: bottom }}
+    />
   );
 }
 
 export default function BackgroundPaws() {
-  return <div>
+  return (
+    <div>
       <Paws left="5%" bottom="8%" />
       <Paws left="80%" bottom="70%" />
       <Paws left="7%" bottom="60%" />
       <Paws left="65%" bottom="5%" />
-      </div>;
+    </div>
+  );
 }
 Paws.propTypes = {};

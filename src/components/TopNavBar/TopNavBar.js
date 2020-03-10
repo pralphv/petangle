@@ -7,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import { LanguageButtonContainer } from "../../containers";
+import { LanguageButtonContainer, DarkThemeSwitchContainer } from "../../containers";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,16 +22,30 @@ const useStyles = makeStyles(theme => ({
   },
   menu: {
     marginRight: "5%"
+  },
+  toolbar: {
+    background: "#333"
   }
 }));
 
-export default function TopNavBar({ homeLink, handleOnClick, iconsToShow, locale }) {
-  const classes = useStyles();
+const useNavBarStyle = makeStyles(theme => ({
+  root: {
+    background: theme.palette.type === "dark"? theme.palette.dark.navBar: theme.palette.primary
+  }
+}));
 
+export default function TopNavBar({
+  homeLink,
+  handleOnClick,
+  iconsToShow,
+  locale
+}) {
+  const classes = useStyles();
+  const navBarClasses = useNavBarStyle();
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
-        <Toolbar>
+        <Toolbar classes={navBarClasses}>
           <Typography
             variant="h6"
             className={classes.title}
@@ -40,7 +54,8 @@ export default function TopNavBar({ homeLink, handleOnClick, iconsToShow, locale
             Petangle
           </Typography>
           <div className={classes.menu}>
-            <LanguageButtonContainer showIcon={true}/>
+            <DarkThemeSwitchContainer isNavBar={true} />
+            <LanguageButtonContainer showIcon={true} />
             {iconsToShow.map(icon => {
               if (icon.label.en !== "Home") {
                 return (
@@ -65,5 +80,5 @@ TopNavBar.propTypes = {
   homeLink: PropTypes.string.isRequired,
   handleOnClick: PropTypes.func.isRequired,
   iconsToShow: PropTypes.array.isRequired,
-  locale: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired
 };
