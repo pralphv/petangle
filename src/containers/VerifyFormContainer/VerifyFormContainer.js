@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { useFirebase } from "react-redux-firebase";
 
 import { VerifyForm } from "../../components";
