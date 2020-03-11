@@ -10,20 +10,19 @@ const useStyles = makeStyles(theme => ({
   icon: {
     paddingRight: theme.spacing(1),
     fontSize: "1.5rem"
-
   },
   likeUl: {
     listStyle: "none",
     padding: 0,
     margin: 0,
-    height: 110,
+    maxHeight: 110
   },
   likeLi: {
     padding: theme.spacing(2),
     cursor: "pointer",
     "&:hover": {
-      background: "#DFE0DF"
-    },
+      background: theme.palette.type === "dark" ? "#595959" : "#DFE0DF"
+    }
   }
 }));
 
