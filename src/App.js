@@ -46,7 +46,6 @@ const App = () => {
           primary: {
             main: "#0095AC"
             // 333333
-
           },
           secondary: {
             main: "#60D0E8",
@@ -63,7 +62,6 @@ const App = () => {
           white: "#fff",
           black: "#212121",
           link: "#82EFFF"
-
         },
         overrides: {}
       }),
