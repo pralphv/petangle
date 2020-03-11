@@ -48,7 +48,7 @@ const App = () => {
             // 333333
           },
           secondary: {
-            main: "#60D0E8",
+            main: themeToUse === "dark" ? "#60D0E8" : "#0095AC",
             // main: "#387adf",
             dark: "#60D0E8"
           },
