@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { makeStyles } from "@material-ui/core/styles";
-
 import {
   PetNameInput,
   Cards,
@@ -22,12 +20,6 @@ import {
   decreasePetsCount
 } from "../../firebase/crud";
 import { useLanguage, useSelectedProducts } from "../../utils/customHooks";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    maxWidth: 600
-  }
-}));
 
 const EMPTY_TEXT = {
   en: "You have not added any pets",
@@ -64,7 +56,6 @@ export const MyPetsContainer = ({ fetchProduct }) => {
   const [deletingId, setDeletingId] = useState("");
   const [notificationActive, setNotificationActive] = useState(false);
 
-  const classes = useStyles();
 
   function handleClose() {
     setOpen(false);
@@ -107,7 +98,7 @@ export const MyPetsContainer = ({ fetchProduct }) => {
   );
 
   return (
-    <div className={classes.root}>
+    <div>
       {pets ? (
         Object.entries(pets).map(([key, values]) => (
           <div key={key}>

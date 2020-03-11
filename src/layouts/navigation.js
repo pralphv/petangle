@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { useFirebase } from "react-redux-firebase";
 
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import HomeIcon from "@material-ui/icons/Home";
@@ -21,7 +20,7 @@ import { useLoggedIn } from "../utils/customHooks";
 import { logout } from "../firebase/crud";
 import BackgroundPaws from "./backgroundPaws";
 import * as constants from "./constants";
-import { useLanguage } from "../utils/customHooks";
+import { useLanguage, useIsMobile } from "../utils/customHooks";
 import { MISC_LANG } from "../utils/constants";
 
 const useStyles = makeStyles(theme => ({
@@ -136,7 +135,7 @@ export default function Navigation({ children }) {
   const locale = useLanguage();
 
   const iconStyleOverideClasses = iconStyleOveride();
-  const isMobile = useMediaQuery("(max-width:680px)");
+  const isMobile = useIsMobile();
   const isLoggedIn = useLoggedIn();
 
   const iconsToShow = showIcons(isLoggedIn, isMobile);

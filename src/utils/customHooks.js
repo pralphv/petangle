@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 export function useWindow() {
   const [width, setWidth] = useState(0);
@@ -95,4 +96,9 @@ export function useIsAuthLoaded() {
 export function useLanguage() {
   const language = useSelector(state => state.language.language);
   return language;
+}
+
+export function useIsMobile() {
+  const isMobile = useMediaQuery("(max-width:680px)");
+  return isMobile;
 }
