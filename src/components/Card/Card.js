@@ -14,8 +14,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     background: theme.palette.background.default,
     cursor: "pointer",
-    maxWidth: 280
-    // width: "100%"
+    maxWidth: "680px",
+    width: "100%"
   },
   icon: {
     margin: "auto",
@@ -31,8 +31,9 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.type === "dark" ? "#809EFF" : "#004DAA"
   },
   animalIcon: {
-    color: theme.palette.type === "dark" ? theme.palette.white : theme.palette.black
-  },
+    color:
+      theme.palette.type === "dark" ? theme.palette.white : theme.palette.black
+  }
 }));
 
 function Card({ title, subtitle, icon, handleOnClick, label }) {
@@ -52,44 +53,42 @@ function Card({ title, subtitle, icon, handleOnClick, label }) {
   const useFontAwesome = ["like", "dislike"].includes(icon) ? false : true;
 
   return (
-    <div className={classes.root}>
-      <Grid
-        container
-        spacing={2}
-        onClick={handleOnClick}
-        alignContent="center"
-        alignItems="center"
-        justify="center"
-      >
-        <Grid item xs={2}>
-          {useFontAwesome ? (
-            <FontAwesomeIcon
-              icon={Icon}
-              className={`${classes.icon} ${classToUse}`}
-            />
-          ) : (
-            <Icon className={`${classes.icon} ${classToUse}`} />
-          )}
-        </Grid>
-        <Grid item xs={10} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item>
-              <Typography variant="subtitle2">{title}</Typography>
-              <Typography variant="body2" color="textSecondary">
-                {subtitle}
-              </Typography>
-            </Grid>
-          </Grid>
-          {label && (
-            <Grid>
-              <Typography variant="caption" color="textSecondary">
-                {label}
-              </Typography>
-            </Grid>
-          )}
-        </Grid>
+    <Grid
+      container
+      className={classes.root}
+      onClick={handleOnClick}
+      alignContent="center"
+      alignItems="center"
+      justify="center"
+    >
+      <Grid item xs={2}>
+        {useFontAwesome ? (
+          <FontAwesomeIcon
+            icon={Icon}
+            className={`${classes.icon} ${classToUse}`}
+          />
+        ) : (
+          <Icon className={`${classes.icon} ${classToUse}`} />
+        )}
       </Grid>
-    </div>
+      <Grid item xs={10} sm container>
+        <Grid item xs container direction="column" spacing={2}>
+          <Grid item>
+            <Typography variant="subtitle2">{title}</Typography>
+            <Typography variant="body2" color="textSecondary">
+              {subtitle}
+            </Typography>
+          </Grid>
+        </Grid>
+        {label && (
+          <Grid>
+            <Typography variant="caption" color="textSecondary">
+              {label}
+            </Typography>
+          </Grid>
+        )}
+      </Grid>
+    </Grid>
   );
 }
 Card.propTypes = {

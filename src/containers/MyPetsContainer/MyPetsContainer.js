@@ -25,9 +25,7 @@ import { useLanguage, useSelectedProducts } from "../../utils/customHooks";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // maxWidth: 280,
-    width: "100%"
-
+    maxWidth: 600
   }
 }));
 

@@ -10,8 +10,7 @@ const TEXT = {
   en: "My Pets",
   zh: "我的寵物",
   jp: "マイペット"
-}
-
+};
 
 function MyPetsPage() {
   const isVerified = useIsVerified();
@@ -19,7 +18,7 @@ function MyPetsPage() {
   const locale = useLanguage();
 
   return (
-    <div >
+    <div>
       <HelmetWrapper title={TEXT[locale]} content={TEXT[locale]} />
       {!isAuthLoaded ? (
         <LoadingSpinner />

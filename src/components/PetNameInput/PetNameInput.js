@@ -4,14 +4,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { fade, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Grid from "@material-ui/core/Grid";
 import { faCat, faDog, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const CustomInputBase = withStyles(theme => ({
   input: {
-    margin: theme.spacing(2),
-    paddingLeft: theme.spacing(1),
-    width: 210,
-    border: "0px",
     "&:focus": {
       boxShadow: `${fade("#eeeeee", 0.8)} 0 0 0 0.15rem`
     },
@@ -24,6 +21,7 @@ const CustomInputBase = withStyles(theme => ({
 const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.background.default,
+    padding: theme.spacing(2)
   },
   x: {
     cursor: "pointer",
@@ -33,8 +31,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   icon: {
-    color: theme.palette.type === "dark"? "#fff": "#00273C"
-
+    color: theme.palette.type === "dark" ? "#fff" : "#00273C"
   }
 }));
 
@@ -54,19 +51,25 @@ export default function PetNameInput({
   const Icon = iconMap[animal];
 
   return (
-    <div className={classes.root}>
-      <FontAwesomeIcon className={classes.icon} icon={Icon} />
-      <CustomInputBase
-        autoComplete="off"
-        defaultValue={value}
-        onBlur={handleNameOnBlur}
-        id={id}
-      />
-      <FontAwesomeIcon
-        className={classes.x}
-        icon={faTimes}
-        onClick={handleDeleteOnClick}
-      />
-    </div>
+    <Grid container className={classes.root} alignItems="center">
+      <Grid item xs={1}>
+        <FontAwesomeIcon className={classes.icon} icon={Icon} />
+      </Grid>
+      <Grid item xs={10}>
+        <CustomInputBase
+          autoComplete="off"
+          defaultValue={value}
+          onBlur={handleNameOnBlur}
+          id={id}
+        />
+      </Grid>
+      <Grid item xs={1}>
+        <FontAwesomeIcon
+          className={classes.x}
+          icon={faTimes}
+          onClick={handleDeleteOnClick}
+        />
+      </Grid>
+    </Grid>
   );
 }

@@ -9,10 +9,10 @@ export default function Cards({ productsObj, history, icon, label }) {
 
   const cardsToLoop = Object.entries(productsObj);
   const finishedLoading = Object.values(productsObj).every(elem => !!elem);
-  
+
   function handleOnClick(id) {
     let path = `/product/${id}`;
-    path = locale? `/${locale}${path}` : path
+    path = locale ? `/${locale}${path}` : path;
     history.push(path);
     window.scrollTo(0, 0);
   }

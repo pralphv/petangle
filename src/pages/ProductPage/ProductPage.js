@@ -10,7 +10,8 @@ import TextSeparator from "./TextSeparator";
 const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.background.default,
-    opacity: 1
+    opacity: 1,
+    maxWidth: 280
   }
 }));
 
