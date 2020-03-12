@@ -5,7 +5,7 @@ import { ProductsTableContainer } from "../../containers";
 import { AnimalSelectContainer } from "../../containers";
 import { BrandSelectContainer } from "../../containers";
 import { FoodCategorySelectContainer } from "../../containers";
-import { useWindow, useLanguage, useIsMobile } from "../../utils/customHooks";
+import { useWindow, useLanguage } from "../../utils/customHooks";
 import { HelmetWrapper } from "../../components";
 
 const useStyles = makeStyles(theme => ({
@@ -38,9 +38,7 @@ const HomePage = ({ history }) => {
   if (!currentLanguage && currentLanguage !== reduxLocale) {
     history.push(`${reduxLocale}/`);
   }
-  const isMobile = useIsMobile();
-  const display = isMobile ? "block" : "inline-flex";
-
+  const display = width <= 680 ? "block" : "inline-flex";
   return (
     <div>
       <HelmetWrapper
